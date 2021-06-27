@@ -1,0 +1,59 @@
+{% extends 'base.html'%}
+
+{% block title %}Admin{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <div class="col s12">
+                    <h6>Add Class</h6>
+                </div>
+    
+                <div class="col s12 m6">
+                    <label for="class_name">Name:</label>
+                    <input type="text" id="class_name">
+                </div>
+                <div class="col s12 m6">
+                    <button class="btn btn-primary pull-right" id="add_class">Add</button>
+                </div>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="section" id="student_table">
+            <table class="centered striped">
+                <thead>
+                    <tr>
+                        <th>Sl no.</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Email</th>
+                        <th>Date of Birth</th>
+                        <th>Class</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for student in students %}
+                        <tr class="student_details" data-id={{student.id}}>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{student.first_name}}</td>
+                            <td>{{student.last_name}}</td>
+                            <td>{{student.email}}</td>
+                            <td>{{student.dob}}</td>
+                            <td>{{student.class_field.name}}</td>
+                            <td><label><input class="student_status filled-in" type="checkbox" {%if student.status == 1 %}checked{%endif%}><span></span></label></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% csrf_token %}
+{% endblock %}
+
+{% load static %}
+
+{% block javascript%}
+    <script src="{% static 'class_details/js/class_details/admin.js' %}"></script>
+{% endblock %}

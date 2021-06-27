@@ -1,0 +1,71 @@
+{% extends 'base.html'%}
+
+{% load static %}
+
+{% block title %}Student{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row center-align">
+            <div class="col s12">
+                <h4>Profile details <a href="{% url 'class_details:student_form' student_id=student.id%}"><span style="font-size:16px;float:right"><i class="fas fa-edit"></i></span></a></h4>
+            </div>
+            <div class="col s12 student_image">
+                <img src="/static/class_details/images/{{student.image.name}}" height=100px>
+            </div>
+            <div class="col s12 m6 student_details">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                      <span class="card-title">First Name:</span>
+                      <p>{{student.first_name}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 student_details">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                      <span class="card-title">Last Name:</span>
+                      <p>{{student.last_name}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4 student_details">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                      <span class="card-title">Email:</span>
+                      <p>{{student.email}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4 student_details">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                      <span class="card-title">Date of Birth:</span>
+                      <p>{{student.dob}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4 student_details">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                      <span class="card-title">Class:</span>
+                      <p>{{student.class_field.name}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="edit_details_modal" class="modal">
+        <div class="modal-content">
+          <h4>Edit Details</h4>
+          <div id="edit_details_form">
+
+          </div>
+        </div>
+    </div>
+    {% csrf_token %}
+{% endblock %}
+
+{% block javascript%}
+    <script src="{% static 'class_details/js/class_details/index.js' %}"></script>
+{% endblock %}
