@@ -26,9 +26,7 @@ class RegistrationForm(forms.Form):
         return self.cleaned_data.get('password2')
     
     def clean_email(self):
-        print(self.cleaned_data.get("email"),file=sys.stderr)
         if Student.objects.filter(email=self.cleaned_data.get("email")).exists():
-            print(self.cleaned_data.get("email"),file=sys.stderr)
             self._errors['email'] = self.error_class(['Email exists already!'])
         return self.cleaned_data.get("email")
 
